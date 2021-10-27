@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Sorry! An error occurred </h1>
+    <div class="p tex-light lead">{{e}}</div>
+    <p class="lead">Sorry {{request.user}}, ensure you have an internet connection and try again...</p>
+    <a href="{% url 'library:home' %}" class="btn btn-dark btn-larg">
+        <big><big><big><b>HOME</b></big></big></big>
+    </a>
+{% endblock content %}

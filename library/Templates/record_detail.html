@@ -1,0 +1,42 @@
+<!--inherits the layout-->
+{% extends 'base2.html' %}
+<!--static-->
+{% load static %}
+<!--title-->
+{% block title %}{{page_title}}{% endblock title %}
+
+<!--additional css-->
+
+<!--content-->
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-offset-4 is-4">
+        <div class="p-2 mt-2" style="background:black;"><h1 class="title">Recorded audio</h1></div>
+        <div class="card mt-2 p-5" style="background: black;">
+          <div class="card-image m-1">
+            <audio src="{{record.voice_record.url}}" controls></audio>
+          </div>
+          <p><a href="record.voice_record.url" class="btn btn-dark" download>Download</a></p>
+          <div class="card-content">
+            <div class="content">
+              <p>Language: 
+                {% if record.language == 'en' %}English
+                {% elif record.language == 'fr' %}French
+                {% elif record.language == 'de' %}German
+                {% elif record.language == 'el' %}Greek
+                {% elif record.language == 'ko' %}Korean
+                {% elif record.language == 'hi' %}Hindi
+                {% elif record.language == 'zh-hk' %}Chinese (Hong Kong)
+                {% endif %}
+              </p>
+            </div>
+          </div>
+          <div class="bg-light text-dark text-justify p-4">{{record.pdf}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

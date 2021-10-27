@@ -1,0 +1,119 @@
+<!--inherits the layout-->
+{% extends '_base.html' %}
+<!--static-->
+{% load static %}
+<!--title-->
+
+<!--additional css-->
+
+{% block css %}
+<link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+<link href="{% static 'bootstrap/css/bootstrap.css.map' %}" rel="stylesheet">
+<link href="{% static 'bootstrap/css/bootstrap-theme.css' %}" rel="stylesheet">
+<link href="{% static 'bootstrap/css/bootstrap-theme.css.map' %}" rel="stylesheet">
+
+
+<link href="{% static 'assets/css/video-js.css' %}" rel="stylesheet"/>
+<link href="{% static 'assets/css/all.min.css' %}" rel="stylesheet"/>
+<link href="{% static 'assets/css/videojs.wavesurfer.min.css' %}" rel="stylesheet"/>
+<link href="{% static 'assets/css/videojs.record.css' %}" rel="stylesheet"/>
+
+
+
+<!-- Favicons -->
+<link href="{% static 'images/logo.jpg' %}" rel="icon">
+<link href="{% static 'images/logo.jpg' %}" rel="apple-touch-icon">
+{% endblock css %}
+<!--content-->
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark mb-2" style="background:black;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'library:home' %}">
+            <img src="{% static 'images/logo.jpg' %}" alt="" style="width:100px;border-radius:100px;">
+            AUDIO BOOKS
+        </a>
+        <span style="float:right;">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+             </button>
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="#">Home</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="#">Link</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link disabled">Disabled</a>
+                      </li>
+                  </ul>
+                  <form class="d-flex">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                  </form>
+              </div>
+        </span>
+    </div>
+</nav>
+
+<main class="container row text-light p-5 m-auto text-center" style="background:black; margin: 2 auto; width:99.6%;opacity:0.9;">
+    <audio src="{% static 'audio.mp3' %}" controls></audio>
+    <br>
+    <a href="{% static 'audio.mp3' %}" download class="btn btn-dark btn-lg">Download</a>
+</main>
+
+
+<footer class="text-light p-2 mt-2" style="background:black;padding: 0 30px;">
+    <div class="row">
+        {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+        <div class="col text-left">
+            <a href="{% url 'admin:index' %}" class="text-warning"><i>visit admin site...</i></a>
+        </div>
+        {% endif %}
+        {% endif %}
+        <div class="col text-center m-3">
+            <b>Audiobooks</b> &copy; 2021
+        </div>
+
+        {% if user.is_authenticated %}
+        <div class="col text-right">
+            <a href="{% url 'veriuser:logout' %}" class="btn btn-warning">
+                <i>
+                    Logout
+                    <b class="text-capitalize">{{user}}</b>
+                </i>
+            </a>
+        </div>
+        {% else %}
+        <div class="col text-right">
+            <a href="{% url 'veriuser:login' %}" class="btn btn-warning">
+                <i>
+                    Login
+                </i>
+            </a>
+        </div>
+        {% endif %}
+
+
+    </div>
+</footer>
+{% endblock content %}
+
+<!--additional js-->
+{% block js %}
+<script src="{% static 'assets/js/video.min.js' %}"></script>
+<script src="{% static 'assets/js/RecordRTC.js' %}"></script>
+<script src="{% static 'assets/js/adapter-latest.js' %}"></script>
+<script src="{% static 'assets/js/wavesurfer.js' %}"></script>
+<script src="{% static 'assets/js/wavesurfer.microphone.min.js' %}"></script>
+<script src="{% static 'assets/js/videojs.wavesurfer.min.js' %}"></script>
+
+<script src="{% static 'assets/js/videojs.record.min.js' %}"></script>
+<script src="{% static 'assets/js/browser-workaround.js' %}"></script>
+<script src="{% static 'assets/js/real.recording.js' %}"></script>
+{% endblock js %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="p-3 mt-1" style="background:black;">
+    {% if error %}
+    {{error}}
+    {% endif %}
+    {% for message in messages %}
+    <p class="text-light">
+        <b> {{message}} ! </b>
+     </p>
+     {% endfor %}
+    <div class="form">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+                    {{form.title|as_crispy_field}}
+                    {{form.book|as_crispy_field}}
+                    {{form.thumbnail|as_crispy_field}}
+                    {{form.description|as_crispy_field}}
+            <br>
+            <input type="submit" value="Submit" class="btn btn-dark btn-block">
+            <input type="reset" value="Clear" class="btn btn-primary btn-block">
+        </form>
+
+    </div>
+</div>
+
+
+{% endblock content %}

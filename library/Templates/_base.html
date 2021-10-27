@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+        body{
+            background: url({% static 'images/pexels-element-digital-1370295.jpg' %});
+            background-attachment:fixed;
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size:cover;
+            height:100%;
+        }
+    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block css %}{% endblock css %}
+
+    <title>AUDIO BOOKS</title>
+    <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/bootstrap.css.map' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/bootstrap-theme.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/bootstrap-theme.css.map' %}" rel="stylesheet">
+
+    <!-- Favicons -->
+    <link href="{% static 'images/logo.jpg' %}" rel="icon">
+    <link href="{% static 'images/logo.jpg' %}" rel="apple-touch-icon">
+    {% block head %}
+    {% endblock head %}
+</head>
+  <body>
+    <!--header-->
+    <!--content-->
+    {% block content %} {% endblock content %}
+    <!-- js-->
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script>
+      const csrftoken = "{{ csrf_token }}";
+      if (csrftoken) {
+        function csrfSafeMethod(method) {
+          // these HTTP methods do not require CSRF protection
+          return /^(GET|HEAD|OPTIONS|TRACE)$/.test(method);
+        }
+        $.ajaxSetup({
+          beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+          },
+        });
+      }
+    </script>
+    {% block js %}{% endblock js %}
+  </body>
+</html>

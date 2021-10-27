@@ -1,0 +1,51 @@
+{% load static %}
+
+<link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+<link href="{% static 'bootstrap/css/bootstrap.css.map' %}" rel="stylesheet">
+<link href="{% static 'bootstrap/css/bootstrap-theme.css' %}" rel="stylesheet">
+<link href="{% static 'bootstrap/css/bootstrap-theme.css.map' %}" rel="stylesheet">
+
+<!-- Favicons -->
+    <link href="{% static 'images/logo.jpg' %}" rel="icon">
+    <link href="{% static 'images/logo.jpg' %}" rel="apple-touch-icon">
+
+<style>
+
+    body{
+        background: url({% static 'images/pexels-element-digital-1370295.jpg' %});
+        background-repeat:no-repeat;
+        background-position:center;
+        background-size:cover;
+        height:100%;
+    }
+    h1{
+        color:purple;
+        text-shadow: 0 0 10px black;
+    }
+    h5{
+        color:black
+    }
+    .title{
+        color:purple;
+    }
+    .yy{
+        color:red;
+    }
+
+
+</style>
+
+<div class="row">
+    <div class="col-md-10 offset-md-1 mt-1 p-2 text-light" style="opacity:0.95;font-weight:bold;">
+        <center><img src="{% static 'images/logo.jpg' %}" alt="" style="width:100px;border-radius:100px;p"></center>
+        {% block content %}
+        {% endblock content %}
+    </div>
+</div>
+
+<footer class="fixed-bottom row text-light" style="background:black;">
+    <span class="col col-md-12 text-center"><b>Audiobooks &copy; 2021 {% if user.is_authenticated %}{% endif %}</b></span>
+</footer>
+<script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+<script src="{% static 'bootstrap/js/npm.js' %}"></script>
+

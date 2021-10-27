@@ -1,0 +1,167 @@
+<!--inherits the layout-->
+{% extends '_base.html' %}
+<!--static-->
+{% load static %}
+<!--title-->
+
+<!--additional css-->
+
+{% block css %}
+<link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+<link href="{% static 'bootstrap/css/bootstrap.css.map' %}" rel="stylesheet">
+<link href="{% static 'bootstrap/css/bootstrap-theme.css' %}" rel="stylesheet">
+<link href="{% static 'bootstrap/css/bootstrap-theme.css.map' %}" rel="stylesheet">
+
+
+<link href="{% static 'assets/css/video-js.css' %}" rel="stylesheet"/>
+<link href="{% static 'assets/css/all.min.css' %}" rel="stylesheet"/>
+<link href="{% static 'assets/css/videojs.wavesurfer.min.css' %}" rel="stylesheet"/>
+<link href="{% static 'assets/css/videojs.record.css' %}" rel="stylesheet"/>
+
+
+
+<!-- Favicons -->
+<link href="{% static 'images/logo.jpg' %}" rel="icon">
+<link href="{% static 'images/logo.jpg' %}" rel="apple-touch-icon">
+{% endblock css %}
+<!--content-->
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark mb-2" style="background:black;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'library:home' %}">
+            <img src="{% static 'images/logo.jpg' %}" alt="" style="width:100px;border-radius:100px;">
+            AUDIO BOOKS
+        </a>
+        <span style="float:right;">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+             </button>
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="{% url 'library:home' %}">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link disabled">Search for book</a>
+                    </li>
+                </ul>
+                {% include 'search_form.html' %}
+              </div>
+        </span>
+    </div>
+</nav>
+
+<main class="container row text-light p-2 m-auto" style="background:black; margin: 2 auto; width:99.6%;opacity:0.9;">
+    <div class="col col-md-12">
+        <div class="container">
+            <div class="col">
+                <div class="col col-md-4 offset-md-4">
+                    <h1 class="title text-light">Speech to text</h1>
+                    <article class="message is-success" id="alert">
+                        <div class="message-header">
+                            <p>Recorded successfully!</p>
+                            <button class="delete" aria-label="delete"></button>
+                        </div>
+                        <div class="message-body">
+                            You have successfully recorded your message. You can now click on
+                            the Submit button to post it.
+                        </div>
+                    </article>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="field">
+                            <div class="control icon-left icon-right">
+                                <div class="row">
+                                    <div class="col col-md-1">
+                                        <span class="icon icons-left">
+                                            <i class="fas fa-language"></i>
+                                        </span>
+                                    </div>
+                                    <div class="col ">
+                                        <select class="input form-control" id="language" name="language">
+                                            <option value="en">Language</option>
+                                            <option value="en">English</option>
+                                            <option value="fr">French</option>
+                                            <option value="de">German</option>
+                                            <option value="el">Greek</option>
+                                            <option value="ko">Korean</option>
+                                            <option value="hi">Hindi</option>
+                                            <option value="zh-hk">Chinese (Hong Kong)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col col-md-1">
+                                        <span class="icon icon-right">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control has-icons-left has-icons-right" style="margin-top: 1rem">
+                                <audio id="recordAudio" class="video-js vjs-default-skin"></audio>
+                            </div>
+                            <div class="control" style="margin-top: 1rem">
+                                <button class="btn btn-dark btn-lg" id="submit"><b>Submit</b></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+<footer class="text-light p-2 mt-2" style="background:black;padding: 0 30px;">
+    <div class="row">
+        {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+        <div class="col text-left">
+            <a href="{% url 'admin:index' %}" class="text-warning"><i>visit admin site...</i></a>
+        </div>
+        {% endif %}
+        {% endif %}
+        <div class="col text-center m-3">
+            <b>Audiobooks</b> &copy; 2021
+        </div>
+
+        {% if user.is_authenticated %}
+        <div class="col text-right">
+            <a href="{% url 'veriuser:logout' %}" class="btn btn-warning">
+                <i>
+                    Logout
+                    <b class="text-capitalize">{{user}}</b>
+                </i>
+            </a>
+        </div>
+        {% else %}
+        <div class="col text-right">
+            <a href="{% url 'veriuser:login' %}" class="btn btn-warning">
+                <i>
+                    Login
+                </i>
+            </a>
+        </div>
+        {% endif %}
+
+
+    </div>
+</footer>
+{% endblock content %}
+
+<!--additional js-->
+{% block js %}
+<script src="{% static 'assets/js/video.min.js' %}"></script>
+<script src="{% static 'assets/js/RecordRTC.js' %}"></script>
+<script src="{% static 'assets/js/adapter-latest.js' %}"></script>
+<script src="{% static 'assets/js/wavesurfer.js' %}"></script>
+<script src="{% static 'assets/js/wavesurfer.microphone.min.js' %}"></script>
+<script src="{% static 'assets/js/videojs.wavesurfer.min.js' %}"></script>
+
+<script src="{% static 'assets/js/videojs.record.min.js' %}"></script>
+<script src="{% static 'assets/js/browser-workaround.js' %}"></script>
+<script src="{% static 'assets/js/real.recording.js' %}"></script>
+{% endblock js %}

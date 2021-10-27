@@ -1,0 +1,50 @@
+{% extends 'base2.html' %}
+
+
+{% block content %}
+<div style="background:black;">
+<h1>SEARCH RESULTS</h1>
+<p class="lead">question: {{question}}</p>
+</div>
+{% if no_result %}
+<div style="background:black">
+    <p>no result: {{no_result}}</p>
+</div>
+{% else %}
+<div class="row">
+{% for book in results %}
+
+<div class="col-md-4">
+            <div class="home-item m-1"><a class=" ">
+                <div class="text-light p-1"><h1>{{book.title}}</h1></div>
+                <a href="{{book.book.url}}" title="OPEN">
+                    {% if book.thumbnail %}
+                    <img src="{{book.thumbnail.url}}" alt="book thumbnail" style="width:100%;height:150px;">
+                    {% else %}
+                    <img src="static/images/logo.jpg" alt="book thumbnail" style="width:100%;height:150px;">
+                    {% endif %}
+                </a>
+                <a href="{% url 'library:play_book' book.id %}" title="PLAY AS AUDIO" class="text-light"><b>PLAY AS AUDIO</b></a>
+            </div>
+        </div>
+{% endfor %}
+</div>
+{% endif %}
+
+    <style>
+    .home-item{
+        background:black;
+        padding: 5px;
+        margin: 0 auto;
+        border: 0px;
+        #box-shadow: 0 0 5px gold;
+    }
+    .home-item:hover{
+        background:#111100;
+        padding: 5px;
+        margin: 0 auto;
+        border: 0px;
+        box-shadow: 0 0 5px gold;
+    }
+    </style>
+{% endblock content %}

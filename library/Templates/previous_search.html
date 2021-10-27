@@ -1,0 +1,34 @@
+{% extends 'base2.html' %}
+
+
+{% block content %}
+<h1 style="border:4px solid black;background:white;color:black;">PREVIOUS SEARCH RECORDS</h1>
+{% if empty %}
+<p>no result: {{empty}}</p>
+{% else %}
+
+{% for r in results %}
+<div class="container">
+    <div class="row">
+        <div class="col card card-body m-1" style="background:black;">
+            <p>
+                <audio src="{{r.voice_record.url}}" controls preload="metadata"></audio>
+            </p>
+            <p class="text-light">
+                LANGUAGE:
+                {% if r.language == 'en' %}English
+                {% elif r.language == 'fr' %}French
+                {% elif r.language == 'de' %}German
+                {% elif r.language == 'el' %}Greek
+                {% elif r.language == 'ko' %}Korean
+                {% elif r.language == 'hi' %}Hindi
+                {% elif r.language == 'zh-hk' %}Chinese (Hong Kong)
+                {% endif %}
+            </p>
+            <p><a href="{% url 'library:search_result' r.id %}" class="btn btn-dark m-1">Search Result</a><a href="{% url 'library:delete_search' r.id %}" class="btn btn-danger">Delete</a></p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,34 @@
+{% extends 'veriuser/userauth.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="p-4" style="background:black;">
+    <title>AUDIOBOOKS | Register</title>
+    <div class="">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col col-md-6">
+                    <div class="form-group">{{form.first_name|as_crispy_field}}</div>
+                </div>
+                <div class="col col-md-6">
+                    <div class="form-group">{{form.last_name|as_crispy_field}}</div>
+                </div>
+            </div>
+            <div class="form-group">{{form.email|as_crispy_field}}</div>
+            <div class="form-group">{{form.username|as_crispy_field}}</div>
+
+            <div class="row">
+                <div class="col col-md-6"><div class="form-group">{{form.password1|as_crispy_field}}</div></div>
+                <div class="col col-md-6"><div class="form-group">{{form.password2|as_crispy_field}}</div></div>
+            </div>
+
+            <input type="submit" value="Sign up" class="btn btn-dark btn-block">
+            <input type="reset" value="Clear" class="btn btn-primary btn-block">
+            <a href="{% url 'veriuser:login' %}"><p class="text-center text-info">Already have an account</p></a>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
+

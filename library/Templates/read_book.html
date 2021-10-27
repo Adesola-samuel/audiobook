@@ -1,0 +1,13 @@
+{% extends 'base2.html' %}
+
+
+{% block content %}
+
+<div class="row">
+{% if pages %}
+    {% for i in range(1, pages) %}
+    <audio src="page{{i}}.mp3"></audio>
+    {% endfor %}
+{% endif %}
+</div>
+{% endblock content %}

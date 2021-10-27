@@ -1,0 +1,78 @@
+{% extends 'base2.html' %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="home-item m-1">
+            <div class="text-light p-1"><h1>Voice Search...</h1></div>
+            <a href="{% url 'library:search' %}" title="CLICK VOICE SEARCH">
+                <img src="static/images/pexels-pixabay-221164.jpg" alt="book thumbnail" style="width:100%;height:150px;">
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="home-item m-1">
+            <div class="text-light p-1"><h1>Books</h1></div>
+            <a href="{% url 'library:books' %}" title="AVAILABLE BOOKS">
+                <img src="static/images/pexels-emily-768125.jpg" alt="book thumbnail" style="width:100%;height:150px;">
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="home-item m-1">
+            <div class="text-light p-1"><h1>Voice to book</h1></div>
+            <a href="{% url 'library:record' %}" title="RECORD YOUR VOICE AND WE'LL WRITE YOUR BOOK">
+                <img src="static/images/pexels-foteros-352505.jpg" alt="book thumbnail" style="width:100%;height:150px;">
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="home-item m-1">
+            <div class="text-light p-1"><h1>Preview Voice Records</h1></div>
+            <a href="{% url 'library:record_list' %}" title="YOUR VOICE RECORDS">
+                <img src="static/images/pexels-robin-mcpherson-908965.jpg" alt="book thumbnail" style="width:100%;height:150px;">
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="home-item m-1">
+            <div class="text-light p-1"><h1>Upload a book</h1></div>
+            <a href="{% url 'library:add_book' %}" title="UPLOAD YOUR FAVOURITE BOOK">
+                <img src="static/images/pexels-ketut-subiyanto-4246269.jpg" alt="book thumbnail" style="width:100%;height:200px;">
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="home-item m-1">
+            <div class="text-light p-1"><h1>Previous Search Records</h1></div>
+            <a href="{% url 'library:previous_search' %}" title="CHECK YOUR PREVIOUS SEARCH RECORDS">
+                <img src="static/images/pexels-suzy-hazelwood-1759350.jpg" alt="book thumbnail" style="width:100%;height:150px;">
+            </a>
+        </div>
+    </div>
+
+
+</div>
+
+<style>
+    .home-item{
+        background:black;
+        padding: 5px;
+        margin: 0 auto;
+        border: 0px;
+        #box-shadow: 0 0 5px gold;
+    }
+    .home-item:hover{
+        background:#111100;
+        padding: 5px;
+        margin: 0 auto;
+        border: 0px;
+        box-shadow: 0 0 5px gold;
+    }
+
+
+
+</style>
+{% endblock content %}
